@@ -11,9 +11,9 @@ import time
 from sklearn import svm
 from sklearn.metrics import classification_report
 
-trainData = pd.read_csv("https://raw.githubusercontent.com/Vasistareddy/sentiment_analysis/master/data/train.csv")
+trainData = pd.read_csv("data/train.csv")
 # test Data
-testData = pd.read_csv("https://raw.githubusercontent.com/Vasistareddy/sentiment_analysis/master/data/test.csv")
+testData = pd.read_csv("data/test.csv")
 trainData.sample(frac=1).head(5)
 
 vectorizer = TfidfVectorizer(min_df = 5,
