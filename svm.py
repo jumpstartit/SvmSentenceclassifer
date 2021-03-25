@@ -5,6 +5,7 @@ Created on Thu Mar 25 14:00:18 2021
 @author: Tharun Loknath
 """
 import numpy as np
+import matplotlib.pyplot as plt
 
 class svm:
     def __init__(self,learning_rate=0.001,lamb=0.1,epoch=10000):
@@ -24,7 +25,7 @@ class svm:
         for i in range(self.epooch):
             for idx,x in enumerate(X):
                 yfx=(y_dash[idx]*np.dot(x,self.w.T))+self.b-1 # (yi*(xi*w)-b-1)
-                print(yfx)
+                #print(yfx)
                 if np.any(yfx>=1):
                     self.w-=self.lr*(2*self.lambd*self.w)
                     # w-=w-learningrate*(2*lambda*weight)
@@ -33,7 +34,9 @@ class svm:
                     # w-=w-learningrate*(2*lambda*weight-(yi*(xi*w)-b))
                     self.b-=self.lr*y_dash[idx]
                     # b-=learningrate*yi
-                    
+        print(np.linalg.norm(self.w))
+              
+              
     def predict(self, X):
         approx = np.dot(X, self.w) - self.b
         return np.sign(approx)
@@ -41,7 +44,11 @@ class svm:
     
     
 sv=svm()
-x=np.array([[1,7],[2,8],[3,8]])
-y=np.array(([[5,1],[6,-1],[7,3]]))
+x=np.array([[3,1],[3,-1],[7,1],[8,0],[1,0],[0,1],[-1,0],[-2,0]])
+y=np.array(([0,0,0,0,1,1,1,1]))
 sv.fit(x,y)
-print(sv.predict([3,8]))
+
+
+plt.plot(x, linestyle = 'dotted')
+plt.show()
+print(sv.predict([2.5,0.5]))
